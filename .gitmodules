@@ -1,0 +1,3 @@
+[submodule "OrmLight"]
+	path = OrmLight
+	url = https://github.com/IvanNavrotskiy/OrmLight.git
