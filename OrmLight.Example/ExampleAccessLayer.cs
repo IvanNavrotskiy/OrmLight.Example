@@ -3,6 +3,7 @@ using OrmLight.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,11 @@ namespace OrmLight.Example
             new Product() { Id = 6, Category = "dishes", Name = "spoon", Price = 10 },
             new Product() { Id = 7, Category = "dishes", Name = "fork", Price = 10 }
         };
+
+        public TResult Execute<TResult>(QueryInfo queryInfo)
+        {
+            throw new NotImplementedException();
+        }
 
         public QueryableSource<TEntity> Get<TEntity>()
         {

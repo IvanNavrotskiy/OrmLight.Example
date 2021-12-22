@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using OrmLight.Linq;
 
 namespace OrmLight.Example
@@ -8,9 +10,9 @@ namespace OrmLight.Example
     {
         static void Main(string[] args)
         {
-            var list = new List<Product>();
-
-            var res = list.AddCondition(x => x.Id == 1).AddSort(x => x.Id, isDescending:true).Execute();
+            var dal = new ExampleAccessLayer();
+            //dal.Get<Product>().AddCondition(x => x.Category.Equals("dishes")).AddSort(x => x.Id, isDescending: false).AddLimit(3, 1).Execute();
+            dal.Get<Product>().Where(x => x.Category.Equals("dishes")).OrderByDescending(x => x.Id).ToList();
 
             Console.ReadKey();
         }
