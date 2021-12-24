@@ -25,7 +25,7 @@ namespace OrmLight.Example
 
         public TResult Execute<TResult>(QueryInfo queryInfo)
         {
-            throw new NotImplementedException();
+            return default(TResult);
         }
 
         public QueryableSource<TEntity> Get<TEntity>()
