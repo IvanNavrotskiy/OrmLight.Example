@@ -13,18 +13,17 @@ namespace OrmLight.Example
         {
             var dal = new ExampleAccessLayer();
 
-            //Expression<Func<Product, bool>> lambda = x => x.Category == "dishes";
-            Expression<Func<Product, bool>> lambda = x => x.Category == "dishes";
-
-
-
-
-            //dal.Get<Product>().AddCondition(x => x.Category.Equals("dishes")).AddSort(x => x.Id, isDescending: false).AddLimit(3, 1).Execute();
-
-
-
-            dal.Get<Product>().AddCondition(x => x.Category.Equals("dishes")).Execute();
             //dal.Get<Product>().Where(x => x.Category =="dishes").OrderByDescending(x => x.Id).ToList();
+
+            var example = dal
+                .Get<Product>()
+                .AddCondition(x => x.Category.Equals("dishes") || x.Category == "clothes" || x.Id == 41)
+                .AddSort(x => x.Name)
+                .AddSort(x => x.Id, isDescending: true)
+                .AddSortByDescending(x => x.Price)
+                .AddLimit(count: 3, offset: 1)
+                .AddOffset(1)
+                .Execute();
 
             Console.ReadKey();
         }
