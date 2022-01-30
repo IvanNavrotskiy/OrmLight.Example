@@ -13,9 +13,10 @@ namespace OrmLight.Example
         {
             var dal = new ExampleAccessLayer();
 
-            //dal.Get<Product>().Where(x => x.Category =="dishes").OrderByDescending(x => x.Id).ToList();
+            var purelinqExample = dal.Get<Product>().Where(x => x.Category =="dishes")
+                .OrderByDescending(x => x.Id).GetQueryInfo();
 
-            var example = dal
+            var ormLightLinqExample = dal
                 .Get<Product>()
                 .AddCondition(x => x.Category.Equals("dishes") || x.Category == "clothes" || x.Id == 41)
                 .AddSort(x => x.Name)
@@ -24,6 +25,22 @@ namespace OrmLight.Example
                 .AddLimit(count: 3, offset: 1)
                 .AddOffset(1)
                 .Execute();
+                //.GetQueryInfo();
+
+            var query1 = dal
+                .Get<Product>()
+                .AddCondition(x => x.Category.Equals("dishes") || x.Category == "clothes" || x.Id == 41)
+                .AddSort(x => x.Name)
+                .AddSort(x => x.Id, isDescending: true)
+                .AddSortByDescending(x => x.Price);
+
+            var info1 = query1.GetQueryInfo();
+
+            var info2 = query1.AddLimit(30, 0).GetQueryInfo();
+
+            var info3 = query1.AddLimit(count: 3, offset: 1)
+                .AddOffset(2)
+                .GetQueryInfo();
 
             Console.ReadKey();
         }
