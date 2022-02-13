@@ -13,6 +13,8 @@ namespace OrmLight.Example
         {
             var dal = new ExampleAccessLayer();
 
+            dal.Insert<Product>(new Product() { Category = "dishes", Name = "knife", Price = 20 });
+
             var purelinqExample = dal.Get<Product>().Where(x => x.Category =="dishes")
                 .OrderByDescending(x => x.Id).GetQueryInfo();
 

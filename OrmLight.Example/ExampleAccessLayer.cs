@@ -32,5 +32,23 @@ namespace OrmLight.Example
         {
             return new QueryableSource<TEntity>(this, Operation.Read);
         }
+
+        public long[] Insert<TEntity>(IEnumerable<TEntity> entitties)
+        {
+            return new long[0];
+        }
+        public long? Insert<TEntity>(TEntity entity)
+        {
+            try
+            {
+                long[] ids = Insert<TEntity>(new List<TEntity>() { entity });
+                return ids?.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                //log
+                return null;
+            }
+        }
     }
 }
